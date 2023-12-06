@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\ProgramaAnalitico;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('programa-analitico', function() {
-    return view('programas-analiticos.list');
+    
+    $programas_analiticos = ProgramaAnalitico::all();
+    // die($programas_analiticos);
+    return view('programas-analiticos.list', 
+                 compact('programas_analiticos'));
 });
 
 Route::get('programa-analitico/create', function() {
