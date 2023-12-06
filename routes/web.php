@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('seeker');
+});
+
+Route::get('programa-analitico', function() {
+    return view('programas-analiticos.list');
+});
+
+Route::get('programa-analitico/create', function() {
+    return view('programas-analiticos.create');
 });
