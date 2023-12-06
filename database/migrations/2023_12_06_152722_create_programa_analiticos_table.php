@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('codigo');
             $table->string('materia');
             $table->smallInteger('n_hojas');
+            $table->string('img_pages_path');
             $table->string('carrera')->default('Física');
             $table->timestamps();
         });
