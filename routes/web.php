@@ -16,13 +16,12 @@ use App\Models\ProgramaAnalitico;
 */
 
 Route::get('/', function () {
-    return view('seeker');
+    $programas_analiticos = ProgramaAnalitico::all();
+    return view('seeker', compact('programas_analiticos'));
 });
 
 Route::get('programa-analitico', function() {
-    
     $programas_analiticos = ProgramaAnalitico::all();
-    // die($programas_analiticos);
     return view('programas-analiticos.list', 
                  compact('programas_analiticos'));
 });
