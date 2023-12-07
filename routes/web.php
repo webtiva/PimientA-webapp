@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\EmisionPA;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\ProgramaAnalitico;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +31,13 @@ Route::get('programa-analitico', function() {
 
 Route::get('programa-analitico/create', function() {
     return view('programas-analiticos.create');
+});
+
+Route::post('/programa-analitico/emision', function(Request $request) {
+    $emision_pa = new EmisionPA;
+    $emision_pa->nombre_solicitante = $request->input('solicitante');
+    $emision_pa->fecha_emision = Carbon::create($request->input('fecha'));
+    $emision_pa->programa_analitico_id = $request->input('programa_analitico_id');
+    $emision_pa->save();
+    return "se guardo!";
 });
