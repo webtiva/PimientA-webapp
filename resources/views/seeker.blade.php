@@ -331,10 +331,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="emit-date">Fecha de emisión </label>
-            <div>
-              <small class="text-danger">Dejar en blanco este campo. Amenos que quiera emitir con otra fecha</small>
-            </div>
+            <label for="dateIssue">Fecha de emisión <small class="text-muted">(Por defecto es la fecha de hoy)</small></label>
             <div class="input-group">
               <span class="input-group-text">
                 <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +340,7 @@
                     clip-rule="evenodd"></path>
                 </svg> 
               </span>
-              <input data-datepicker="" class="form-control datepicker-input" id="emit-date" type="text" placeholder="mm/dd/yyyy" required="">
+              <input data-datepicker="" class="form-control datepicker-input" id="dateIssue" type="text" required="">
             </div>
           </div>
 
@@ -387,6 +384,7 @@
 
 <!-- Vanilla JS Datepicker -->
 <script src="../../vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/locales/es.js"></script>
 
 <!-- Notyf -->
 <script src="../../vendor/notyf/notyf.min.js"></script>
@@ -436,6 +434,10 @@
           oTable.search($(this).val()).draw() ;
     })
 
+    //Default select current day in datapicker
+    const date = new Date();
+    today = new Intl.DateTimeFormat('es-BO').format(date);
+    inputDP = document.getElementById("dateIssue").setAttribute('value', today);
     
   </script>
 </body>
