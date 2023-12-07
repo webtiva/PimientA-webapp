@@ -4,14 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Page;
 
-class ProgramaAnalitico extends Model
+class Page extends Model
 {
     use HasFactory;
-
-    public function pages()
-    {
-        return $this->hasMany(Page::class);
-    }
 }

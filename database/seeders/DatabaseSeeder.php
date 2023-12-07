@@ -45,5 +45,33 @@ class DatabaseSeeder extends Seeder
             'n_hojas' => random_int(5, 10),
             'img_pages_path' => Str::random(30),
         ]);
+
+        //Insertando datos para el primer prog. anal.
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 1,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-01.jpg',
+        ]);
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 1,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-02.jpg',
+        ]);
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 1,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-03.jpg',
+        ]);
+
+        // para los demas
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 2,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-04.jpg',
+        ]);
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 3,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-05.jpg',
+        ]);
+        DB::table('pages')->insert([
+            'programa_analitico_id' => 4,
+            'url' => '/assets/pa/astrofisica-i/astrofisica-i_page-06.jpg',
+        ]);
     }
 }

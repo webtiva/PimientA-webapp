@@ -253,7 +253,7 @@
       <td>{{$pa->n_hojas}}</td>
       <td>{{$pa->carrera}}</td>
       <td>
-        <button id="btn-{{$pa->id}}" type="button" class="preview-btn btn btn-xs btn-secondary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modal-preview-pa">
+        <button type="button" class="preview-btn btn btn-xs btn-secondary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modal-preview-pa{{$pa->id}}">
           <span style="font-size: 10px;"> Previsualizar </span>
           <svg class="icon icon-xxs ms-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path>
@@ -286,36 +286,31 @@
   </main>
 
   <!-- modals para previsualizar -->
-  
-<div class="modal fade" id="modal-preview-pa" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="h6 modal-title">Previsualización de - <strong>Física I</strong> </h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="pa">
-                    <img src="../../assets/img/example-images-pa/page-0001.jpg" alt="Pagina 1">
-                    <hr>
-                    <img src="../../assets/img/example-images-pa/page-0002.jpg" alt="Pagina 2">
-                    <hr>
-                    <img src="../../assets/img/example-images-pa/page-0003.jpg" alt="Pagina 3">
-                    <hr>
-                    <img src="../../assets/img/example-images-pa/page-0004.jpg" alt="Pagina 4">
-                    <hr>
-                    <img src="../../assets/img/example-images-pa/page-0005.jpg" alt="Pagina 5">
-                    <hr>
-                    <img src="../../assets/img/example-images-pa/page-0006.jpg" alt="Pagina 6">
-                    <hr>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link text-gray ms-auto" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+  @foreach ($programas_analiticos as $pa)
+  <div class="modal fade" id="modal-preview-pa{{$pa->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="h6 modal-title">Previsualización de - <strong>{{$pa->materia}}</strong> </h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="pa">
+                    @forelse ($pa->pages as $page)
+                      <img src="{{$page->url}}" alt="{{$page->materia}}">
+                      <hr>  
+                    @empty
+                        
+                    @endforelse
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-link text-gray ms-auto" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  @endforeach
 
 
 <!-- modal para emitir un programa analítico -->
