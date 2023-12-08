@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <style>
+    @page {
+            margin: 0cm 0cm;
+            font-family: Arial;
+        }
     .document {
       width: 21.5cm;
       font-family: sans-serif;
@@ -76,15 +80,15 @@
 <body>
   <div class="document">
     <div class="page">
-      <img src="/assets/img/example-images-pa/page-0001.jpg" alt="">
+      <img src="{{public_path('assets/img/example-images-pa/page-0001.jpg')}}" alt="">
     </div>
     <div class="page">
-      <img src="/assets/img/example-images-pa/page-0002.jpg" alt="">
+      <img src="{{public_path('assets/img/example-images-pa/page-0002.jpg')}}" alt="">
     </div>
     <div class="page end-page">
       <div class="container-datos">
         <div class="col-sides">
-          <img class="logo" src="/assets/img/logo-umss.jpg" alt="" srcset="">
+          <img class="logo" src="{{public_path('assets/img/logo-umss.jpg')}}" alt="" srcset="">
         </div>
         <div class="col-medium">
           <div class="datos-institucion">
@@ -107,7 +111,7 @@
           </div>
         </div>
         <div class="col-sides">
-          <img class="logo" src="/assets/img/logo-fcyt.png" alt="" srcset="">
+          <img class="logo" src="{{public_path('assets/img/logo-fcyt.png')}}" alt="" srcset="">
         </div>
       </div>
     </div>
