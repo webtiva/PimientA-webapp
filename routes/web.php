@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\ProgramaAnalitico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,9 @@ Route::post('/programa-analitico/emision', function(Request $request) {
     $emision_pa->programa_analitico_id = $request->input('programa_analitico_id');
     $emision_pa->save();
     return redirect('/')->with('status', '¡Emisión del programa analítico exitoso!');
+});
+
+Route::get('/programa-analitico/download', function() {
+    $pdf = Pdf::loadView('doc-pdf-pa')->setPaper('letter');
+    return $pdf->stream('invoice.pdf');
 });
