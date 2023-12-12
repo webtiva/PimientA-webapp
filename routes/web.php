@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\EmisionPA;
+use App\Models\Page;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\ProgramaAnalitico;
@@ -36,6 +37,25 @@ Route::get('programa-analitico/create', function() {
     return view('programas-analiticos.create');
 });
 
+Route::post('/programa-analitico/store', function(Request $request) {
+    //Falta validación
+
+    $pa = new ProgramaAnalitico();
+    $pa->codigo = $request->input('codigo');
+    $pa->materia = $request->input('materia');
+    $pa->save();
+
+    foreach($request->pages as $url) {
+        $page = new Page();
+        $page->programa_analitico_id = $pa->id;
+        $page->url = $url;
+        $page->save();
+    }
+    
+    return redirect('/')
+            ->with('status', '¡El programa analítico: "'.$pa->materia.'", se guardó con éxitoso!');
+
+});
 
 Route::post('/programa-analitico/pages', function(Request $request) {
     $input = $request->all();
@@ -52,10 +72,10 @@ Route::post('/programa-analitico/pages', function(Request $request) {
     $file = $request->file('file');
     $directory = 'pages';
     
-    $path = Storage::put($directory, $file);
+    $path = Storage::disk('public')->put($directory, $file);
 
     return response()->json([
-        'url' => $path,
+        'url' => "/storage/".$path,
     ]);
 
 });
