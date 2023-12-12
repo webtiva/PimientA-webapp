@@ -250,7 +250,6 @@
       <tr>
           <th>Materia</th>
           <th>Código</th>
-          <th>Nro. hojas</th>
           <th>Carrera</th>
           <th>Opciones</th>
       </tr>
@@ -260,7 +259,6 @@
     <tr>
       <td>{{$pa->materia}}</td>
       <td>{{$pa->codigo}}</td>
-      <td>{{$pa->n_hojas}}</td>
       <td>{{$pa->carrera}}</td>
       <td>
         <button type="button" class="preview-btn btn btn-xs btn-secondary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modal-preview-pa{{$pa->id}}">
@@ -431,7 +429,6 @@
         columns: [
           { name: 'materia', orderable: false },
           { name: 'codigo' , orderable: false },
-          { name: 'nro_hojas', "searchable": false, orderable: false },
           { name: 'carrera',   "searchable": false, orderable: false },
           { name: 'opciones',  "searchable": false, orderable: false }
         ],

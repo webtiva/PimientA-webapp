@@ -253,7 +253,6 @@
       <tr>
           <th>Materia</th>
           <th>Código</th>
-          <th>Nro. hojas</th>
           <th>Carrera</th>
           <th>Opciones</th>
       </tr>
@@ -263,7 +262,6 @@
     <tr>
       <td>{{$pa->materia}}</td>
       <td>{{$pa->codigo}}</td>
-      <td>{{$pa->n_hojas}}</td>
       <td>{{$pa->carrera}}</td>
       <td>
         <a href="#">
@@ -368,7 +366,6 @@
         columns: [
           { name: 'materia' },
           { name: 'codigo' },
-          { name: 'nro_hojas',"searchable": false, },
           { name: 'carrera',  "searchable": false, },
           { name: 'opciones', "searchable": false, }
         ],
