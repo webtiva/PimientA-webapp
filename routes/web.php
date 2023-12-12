@@ -37,6 +37,7 @@ Route::get('programa-analitico/create', function() {
 Route::get('/programa-analitico/emision', function(Request $request) {
     $emision_pa = new EmisionPA;
     $emision_pa->nombre_solicitante = $request->input('solicitante');
+    $emision_pa->carrera_solicitante = $request->input('carrera_sol');
     $emision_pa->fecha_emision = Carbon::createFromFormat('d/m/Y', $request->input('fecha'));
     $emision_pa->programa_analitico_id = $request->input('programa_analitico_id');
     $emision_pa->save();
@@ -50,6 +51,7 @@ Route::get('/programa-analitico/emision', function(Request $request) {
         'fecha'       => $date->day." de ".$date->monthName." de ".$date->year,
         'pages'       => $emision_pa->programa_analitico->pages,
         'n_pages'     => $emision_pa->programa_analitico->pages->count(),
+        'carrera_sol' => $emision_pa->carrera_solicitante,
     ];
 
     $pdf = Pdf::loadView('doc-pdf-pa', $data)->setPaper('letter');

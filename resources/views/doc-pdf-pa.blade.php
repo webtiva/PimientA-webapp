@@ -119,7 +119,7 @@
           </div>
           <div class="datos-solicitante">
             <p><span class="field">Nombre: </span><span class="nombre-sol">{{$solicitante}}</span></p>
-            <p><span class="field">Carrera:</span><span style="display: inline-block">Licenciatura en Ing. Informática</span></p>
+            <p><span class="field">Carrera:</span><span style="display: inline-block">{{$carrera_sol}}</span></p>
             <p><span class="field">Materia:</span><span style="display: inline-block">{{$materia}} ({{$codigo}})</span></p>
           </div>
           <div class="datos-n-hojas">

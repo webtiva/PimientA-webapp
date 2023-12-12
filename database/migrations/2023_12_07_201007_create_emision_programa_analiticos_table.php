@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_solicitante');
             $table->date('fecha_emision');
-            $table->unsignedBigInteger('programa_analitico_id')->referen;
+            $table->string("carrera_solicitante");
+            $table->unsignedBigInteger('programa_analitico_id');
             $table->timestamps();
 
             $table->foreign('programa_analitico_id')->references('id')->on('programa_analiticos');

@@ -341,6 +341,11 @@
           </div>
 
           <div class="mb-3">
+            <label for="carrera-sol" class="form-label">Carrera de origen de el/la solicitante</label>
+            <input type="text" class="form-control" id="carrera-sol" name="carrera_sol" required>
+          </div>
+
+          <div class="mb-3">
             <label for="dateIssue">Fecha de emisión <small class="text-muted">(Por defecto es la fecha de hoy)</small></label>
             <div class="input-group">
               <span class="input-group-text">
@@ -358,7 +363,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary">Emitir programa analítico </button>
+        <button type="submit" class="btn btn-secondary">Generar Programa Analítico </button>
         <button type="button" class="btn btn-link text-gray ms-auto" data-bs-dismiss="modal">Cerrar</button>
       </div>
       </form>
