@@ -253,6 +253,16 @@
       </div>
     </div>
 
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
   <form action="/programa-analitico/store" method="POST" id="form-new-pa" enctype="multipart/form-data">
   @csrf
       
@@ -266,11 +276,11 @@
             </div>
             <div class="mb-3">
               <label for="subject" class="form-label">Materia</label>
-              <input type="text" class="form-control" id="subject" name="materia" autofocus>
+              <input type="text" class="form-control" id="subject" name="materia" value="{{ old('materia') }}" autofocus>
             </div>
             <div class="mb-3">
               <label for="idSubject" class="form-label">Código</label>
-              <input type="text" class="form-control" id="idSubject" name="codigo">
+              <input type="text" class="form-control" id="idSubject" name="codigo" value="{{ old('codigo') }}">
             </div>
           </div>
         </div>

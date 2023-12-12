@@ -38,7 +38,19 @@ Route::get('programa-analitico/create', function() {
 });
 
 Route::post('/programa-analitico/store', function(Request $request) {
-    //Falta validación
+    $input = $request->all();
+    $rules = array(
+        'codigo' => 'required',
+        'materia' => 'required',
+        'pages' => 'required',
+    );
+    $messages = [
+        'codigo.required' => 'El campo "Codigo" es obligatorio',
+        'materia.required' => 'El campo "Materia" es obligatorio',
+        'pages.required' => 'Debe seleccionar una imagen por los menos',
+    ];
+
+    Validator::validate($input, $rules, $messages);
 
     $pa = new ProgramaAnalitico();
     $pa->codigo = $request->input('codigo');
