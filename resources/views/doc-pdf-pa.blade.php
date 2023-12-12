@@ -96,17 +96,13 @@
 </head>
 <body>
   {{-- <div class="document"> --}}
+    @foreach ($pages as $page)
     <div class="page">
-      <img src="{{public_path('assets/img/example-images-pa/page-0001.jpg')}}" alt="">
+      <img src="{{public_path($page->url)}}" alt="">
     </div>
 
     <div class="page-break"></div>
-
-    <div class="page">
-      <img src="{{public_path('assets/img/example-images-pa/page-0002.jpg')}}" alt="">
-    </div>
-
-    <div class="page-break"></div>
+    @endforeach
 
     <div class="page end-page">
       <div class="container-datos">
@@ -122,15 +118,15 @@
             <h2>U.M.S.S.</h2>
           </div>
           <div class="datos-solicitante">
-            <p><span class="field">Nombre: </span><span class="nombre-sol">Quispe reinaga</span></p>
+            <p><span class="field">Nombre: </span><span class="nombre-sol">{{$solicitante}}</span></p>
             <p><span class="field">Carrera:</span><span style="display: inline-block">Licenciatura en Ing. Informática</span></p>
-            <p><span class="field">Materia:</span><span style="display: inline-block">Física Básica II (2006019)</span></p>
+            <p><span class="field">Materia:</span><span style="display: inline-block">{{$materia}} ({{$codigo}})</span></p>
           </div>
           <div class="datos-n-hojas">
-            <p>Fojas: 5</p>
+            <p>Fojas: {{$n_pages}}</p>
           </div>
           <div class="fecha-emision">
-            Cochabamba, 17 de agosto de 2023
+            Cochabamba, {{$fecha}}
           </div>
         </div>
         <div class="col-sides" style="right: 0.5cm">

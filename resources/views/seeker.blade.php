@@ -270,7 +270,7 @@
             <path clip-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" fill-rule="evenodd"></path>
           </svg>
         </button>
-        <button type="button" class="btn btn-xs btn-primary d-inline-flex align-items-center emitir" data-bs-toggle="modal" data-bs-target="#modal-emitir-pa" id="btn-{{$pa->id}}">
+        <button type="button" class="btn btn-xs btn-primary d-inline-flex align-items-center emitir" data-bs-toggle="modal" data-bs-target="#modal-emitir-pa" id="btn-{{$pa->id}}-{{$pa->materia}}">
           <span style="font-size: 10px;"> Emitir P.A. </span>
           <svg class="icon icon-xxs ms-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" fill-rule="evenodd"></path>
@@ -328,13 +328,13 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <form action="/programa-analitico/emision" method="post">
+      <form action="/programa-analitico/emision" method="get">
       <div class="modal-header">
-        <h2 class="h6 modal-title">Emitir P.A. - <strong>Física I</strong> </h2>
+        <h2 class="h6 modal-title">Emisión del programa analítico - <span id="label-materia"></span> </h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      @csrf
+      {{-- @csrf --}}
           <div class="mb-3">
             <label for="name-est" class="form-label">Nombre de el/la solicitante</label>
             <input type="text" class="form-control" id="name-est" name="solicitante" autofocus required>
@@ -358,7 +358,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary">Descargar pdf </button>
+        <button type="submit" class="btn btn-secondary">Emitir programa analítico </button>
         <button type="button" class="btn btn-link text-gray ms-auto" data-bs-dismiss="modal">Cerrar</button>
       </div>
       </form>
@@ -460,6 +460,10 @@
         let pa_id = item.getAttribute('id').split('-')[1];
         let inputHidden = document.getElementById("pa_id");
         inputHidden.setAttribute('value', pa_id);
+
+        let materia = item.getAttribute('id').split('-')[2];
+        let headLabelMateria = document.getElementById('label-materia');
+        headLabelMateria.innerHTML = materia;
       })
     })
 

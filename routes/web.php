@@ -34,16 +34,26 @@ Route::get('programa-analitico/create', function() {
     return view('programas-analiticos.create');
 });
 
-Route::post('/programa-analitico/emision', function(Request $request) {
+Route::get('/programa-analitico/emision', function(Request $request) {
     $emision_pa = new EmisionPA;
     $emision_pa->nombre_solicitante = $request->input('solicitante');
-    $emision_pa->fecha_emision = Carbon::create($request->input('fecha'));
+    $emision_pa->fecha_emision = Carbon::createFromFormat('d/m/Y', $request->input('fecha'));
     $emision_pa->programa_analitico_id = $request->input('programa_analitico_id');
     $emision_pa->save();
-    return redirect('/')->with('status', '¡Emisión del programa analítico exitoso!');
-});
 
-Route::get('/programa-analitico/download', function() {
-    $pdf = Pdf::loadView('doc-pdf-pa')->setPaper('letter');
-    return $pdf->stream('invoice.pdf');
+    $date = $emision_pa->fecha_emision;
+
+    $data = [
+        'solicitante' => $emision_pa->nombre_solicitante,
+        'materia'     => $emision_pa->programa_analitico->materia,
+        'codigo'      => $emision_pa->programa_analitico->codigo,
+        'fecha'       => $date->day." de ".$date->monthName." de ".$date->year,
+        'pages'       => $emision_pa->programa_analitico->pages,
+        'n_pages'     => $emision_pa->programa_analitico->pages->count(),
+    ];
+
+    $pdf = Pdf::loadView('doc-pdf-pa', $data)->setPaper('letter');
+    return $pdf->stream($data['solicitante']."_".$data['materia']."_".$date->toDateString().'.pdf');
+
+    // return redirect('/')->with('status', '¡Emisión del programa analítico exitoso!');
 });
