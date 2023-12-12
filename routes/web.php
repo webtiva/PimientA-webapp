@@ -7,6 +7,8 @@ use App\Models\ProgramaAnalitico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,30 @@ Route::get('programa-analitico', function() {
 
 Route::get('programa-analitico/create', function() {
     return view('programas-analiticos.create');
+});
+
+
+Route::post('/programa-analitico/pages', function(Request $request) {
+    $input = $request->all();
+    $rules = array(
+        'file' => 'image|max:5000',
+    );
+    $messages = [
+        'file.image' => 'Solo se permite imágenes jpg y png.',
+        'file.max'   => "Tamaño máximo de archivo es 5MB."
+    ];
+
+    Validator::validate($input, $rules, $messages);
+
+    $file = $request->file('file');
+    $directory = 'pages';
+    
+    $path = Storage::put($directory, $file);
+
+    return response()->json([
+        'url' => $path,
+    ]);
+
 });
 
 Route::get('/programa-analitico/emision', function(Request $request) {

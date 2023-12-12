@@ -243,6 +243,8 @@
       </div>
     </div>
 
+  <form action="/programa-analitico/store" method="POST" id="form-new-pa">
+  @csrf
       
     <div class="row">
       <div class="col-12 col-lg-6 mb-4">
@@ -250,15 +252,15 @@
           <div class="card-body">
             <div class="mb-3">
               <label for="career" class="form-label">Carrera</label>
-              <input type="text" class="form-control" id="career" value="Física" disabled>
+              <input type="text" class="form-control" id="career" value="Física" name="carrera" disabled>
             </div>
             <div class="mb-3">
               <label for="subject" class="form-label">Materia</label>
-              <input type="text" class="form-control" id="subject" autofocus>
+              <input type="text" class="form-control" id="subject" name="materia" autofocus>
             </div>
             <div class="mb-3">
               <label for="idSubject" class="form-label">Código</label>
-              <input type="text" class="form-control" id="idSubject">
+              <input type="text" class="form-control" id="idSubject" name="codigo">
             </div>
           </div>
         </div>
@@ -269,9 +271,9 @@
             <div class="mb-3">
               <div class="form-label"><strong> Subir imágenes del programa analítico</strong></div>
               <!-- informar que debe subir en orden las imágenes -->
-              <form action="#" class="dropzone" id="my-dropzone"></form>
+              <div class="dropzone" id="my-dropzone"></div>
             </div>
-            <small class="form-text text-muted"><strong> Importante: </strong> Solo se aceptan imágenes "png" y "jpg"</small>
+            <small class="form-text text-muted"><strong> Importante: </strong> Solo se aceptan imágenes "png" y "jpg" (tam. max 5MB)</small>
           </div>
         </div>
       </div>
@@ -286,7 +288,7 @@
       </div>
     </div>
 
-
+  </form>
     
 
 <footer class="bg-white rounded shadow p-2 mb-4 mt-4">
@@ -348,8 +350,38 @@
     Dropzone.options.myDropzone = { // The camelized version of the ID of the form element
       addRemoveLinks: true,
       acceptedFiles: '.png,.jpg',
+      maxFilesize: 5,
       dictDefaultMessage: "¡Arrastre y suelte aquí sus archivos!",
       dictRemoveFile: 'Eliminar',
+      url: '/programa-analitico/pages',
+      headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      init: function() {
+        this.on("success", function(file, response) {
+          // console.log(response.url);
+          formNewPA = document.getElementById('form-new-pa');
+          pageInput = document.createElement("div");
+          pageInput.setAttribute('type', 'hidden');
+          pageInput.setAttribute('name', 'pages[]');
+          pageInput.setAttribute('value', response.url);
+          formNewPA.append(pageInput)
+        });
+
+        this.on("error", function(file, message) {
+          if (file.previewElement) {
+            file.previewElement.classList.add("dz-error");
+            if (typeof message !== "string" && message.error) {
+              message = message.error;
+            }
+            for (let node of file.previewElement.querySelectorAll(
+              "[data-dz-errormessage]"
+            )) {
+              node.textContent = message.message;
+            }
+          }
+        });
+      }
     }
   </script>
 </body>
