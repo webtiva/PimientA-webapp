@@ -53,6 +53,19 @@
   .dropzone.dz-started .dz-message {
     display: block !important;
   }
+  .dz-success-mark {
+    background: green;
+  }
+  .dz-error-mark {
+    background: red;
+  }
+  .dz-remove {
+    margin-top: -145px;
+    margin-bottom: 150px;
+  }
+  .dz-remove:hover {
+    color: red;
+  }
 </style>
 
 </head>
@@ -402,7 +415,10 @@
             for (let node of file.previewElement.querySelectorAll(
               "[data-dz-errormessage]"
             )) {
-              node.textContent = message.message;
+              if(message.message != null)
+                node.textContent = message.message;
+              else
+                node.textContent = message;
             }
           }
         });
