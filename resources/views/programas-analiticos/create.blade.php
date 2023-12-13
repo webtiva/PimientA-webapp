@@ -367,6 +367,7 @@
   <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
   <script>
+    
     Dropzone.options.myDropzone = { // The camelized version of the ID of the form element
       addRemoveLinks: true,
       acceptedFiles: '.png,.jpg',
@@ -385,7 +386,11 @@
           pageInput.setAttribute('type', 'hidden');
           pageInput.setAttribute('name', 'pages[]');
           pageInput.setAttribute('value', response.url);
+          pageInput.setAttribute('id', response.url.substring(response.url.length - 8));
           formNewPA.append(pageInput)
+
+          //mi invento, para asi recuperarlo en el event 'removedFile'
+          file.rutaImg = response.url.substring(response.url.length - 8)
         });
 
         this.on("error", function(file, message) {
@@ -400,6 +405,19 @@
               node.textContent = message.message;
             }
           }
+        });
+
+        this.on('removedfile', function(file) {
+          if (file.previewElement != null && file.previewElement.parentNode != null) {
+            file.previewElement.parentNode.removeChild(file.previewElement);
+          }
+
+          inputHidden = document.getElementById(file.rutaImg);
+          if (inputHidden.parentNode) {
+            inputHidden.parentNode.removeChild(inputHidden);
+          }
+          
+          return this._updateMaxFilesReachedClass();
         });
       }
     }
