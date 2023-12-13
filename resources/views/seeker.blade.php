@@ -151,7 +151,7 @@
                       <path d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                   </span>
-                  Modificar
+                  Administrar
                 </span>
               </a>
             </li>
@@ -441,7 +441,7 @@
 
     }); 
     // node_select = document.getElementById('example_length').children.children
-    // hay que modificarle el md=1.5rem y mi=0.5
+    // hay que Administrarle el md=1.5rem y mi=0.5
 
     oTable = $('#example').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
     $('#inputSeeker').keyup(function(){

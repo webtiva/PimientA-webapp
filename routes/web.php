@@ -117,3 +117,13 @@ Route::get('/programa-analitico/emision', function(Request $request) {
 
     // return redirect('/')->with('status', '¡Emisión del programa analítico exitoso!');
 });
+
+Route::delete('/programa-analitico/{id}', function(Request $request, $id) {
+    $item = ProgramaAnalitico::find($id);
+    if($item == null){
+        return redirect('/programa-analitico')->with('status', "Falló la eliminación");
+    } else {
+        $item->delete();
+        return redirect('/programa-analitico')->with('status', "Se eliminó correctamente");
+    }
+});
